@@ -15,6 +15,7 @@
     "querystring": "^0.2.0",
     "request": "^2.79.0",
     "serve-favicon": "~2.3.0",
+    "spectre.css": "^0.1.32",
     "spotify-web-api-node": "^2.3.6"
   }
 }

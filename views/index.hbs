@@ -1,11 +1,10 @@
 <h1>{{title}}</h1>
 
-<p>Welcome to {{title}}</p>
-
-<p>Author: {{author}}</p>
-
-<form class="" action="/search" method="post">
-  <input type="text" name="trackName" placeholder="Enter Track Name">
-  <input type="hidden" name="grant_type" value="client_credentials">
-  <input type="submit" value="Analyze">
+<form class="" action="/audiofeatures" method="post">
+  <div class="form-group">
+    <label class="form-label" for="trackName">Search by Artist and/or Title: </label>
+    <input id="trackName" class="form-input" type="text" name="trackName" placeholder="Enter Artist and/or Title">
+    <input type="hidden" name="grant_type" value="client_credentials">
+  </div>
+  <input class="btn btn-primary" type="submit" value="Analyze">
 </form>
