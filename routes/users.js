@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('User views under construction.');
+    res.send('User views under construction.');
 });
 
 module.exports = router;
