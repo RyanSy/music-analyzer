@@ -1,12 +1,14 @@
 <div class="columns">
-    <h1>Music Analyzer</h1>
+    <div class="column">
+        <h1>Music Analyzer</h1>
 
-    <form class="" action="/audio-features" method="post">
-        <div class="form-group">
-            <label class="form-label" for="trackName">Search by Artist and/or Title: </label>
-            <input id="trackName" class="form-input" type="text" name="trackName" placeholder="Enter Artist and/or Title">
-            <input type="hidden" name="grant_type" value="client_credentials">
-        </div>
-        <input id="submitButton" class="btn btn-primary" type="submit" value="Analyze">
-    </form>
+        <form class="" action="/audio-features" method="post">
+            <div class="form-group">
+                <label class="form-label" for="trackName">Search by Artist and/or Title: </label>
+                <input id="trackName" class="form-input" type="text" name="trackName" placeholder="Enter Artist and/or Title">
+                <input type="hidden" name="grant_type" value="client_credentials">
+            </div>
+            <input id="submitButton" class="btn btn-primary" type="submit" value="Analyze">
+        </form>
+    </div>
 </div>
