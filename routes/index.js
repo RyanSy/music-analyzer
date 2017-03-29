@@ -21,13 +21,11 @@ app.use(bodyParser.urlencoded({
 
 // Render home page
 router.get('/', function(req, res, next) {
-    res.render('index', {
-        title: 'Music Analyzer'
-    });
+    res.render('index');
 });
 
 // Analyze Track
-router.post('/audiofeatures', function(req, res, next) {
+router.post('/audio-features', function(req, res, next) {
     console.log('> req.body:', req.body);
     var trackTitle = req.body.trackName;
     var trackTitleModified = trackTitle.replace(/ /g, '+');
