@@ -3,17 +3,8 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var app = express();
 var request = require('request');
-
-var keys = require('../../music-analyzer-keys/spotifyKeys.js');
-var client_id = '';
-var client_secret = '';
-
-
-
-// var client_id = process.env.CLIENT_ID;
-// var client_secret = process.env.CLIENT_SECRET;
-
-
+var client_id = process.env.CLIENT_ID;
+var client_secret = process.env.CLIENT_SECRET;
 
 // will refactor using SpotifyWebApi for API requests
 var SpotifyWebApi = require('spotify-web-api-node');
