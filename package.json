@@ -1,6 +1,6 @@
 {
   "name": "music-analyzer",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -13,10 +13,9 @@
     "express": "~4.13.4",
     "hbs": "~4.0.0",
     "morgan": "~1.7.0",
+    "nodemon": "^1.18.4",
     "querystring": "^0.2.0",
     "request": "^2.79.0",
-    "serve-favicon": "~2.3.0",
-    "spectre.css": "^0.1.32",
-    "spotify-web-api-node": "^2.3.6"
+    "serve-favicon": "~2.3.0"
   }
 }

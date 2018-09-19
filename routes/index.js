@@ -3,30 +3,20 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var app = express();
 var request = require('request');
-require('dotenv').config()
+require('dotenv').config();
 
 var client_id = process.env.CLIENT_ID;
 var client_secret = process.env.CLIENT_SECRET;
-
-// will refactor using SpotifyWebApi for API requests
-// var SpotifyWebApi = require('spotify-web-api-node');
-// var spotifyApi = new SpotifyWebApi({
-//     clientId: client_id,
-//     clientSecret: client_secret,
-//     redirectUri: 'http://localhost:3000/results'
-// });
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
 
-// Render home page
 router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-// Analyze Track
 router.post('/audio-features', function(req, res, next) {
     console.log('> req.body:', req.body);
     var trackTitle = req.body.trackName;
@@ -53,7 +43,7 @@ router.post('/audio-features', function(req, res, next) {
             console.log('> error in post request for access token: ', error);
         }
 
-        // Get track info
+        // get track info
         var audioTrack = {
             url: 'https://api.spotify.com/v1/search?q=' + trackTitleModified + '&type=artist,track',
             headers: {
@@ -74,7 +64,7 @@ router.post('/audio-features', function(req, res, next) {
                 console.log('> error requesting track info: ', error);
             }
 
-            // Get audio features
+            // get audio features
             var audioFeatures = {
                 url: 'https://api.spotify.com/v1/audio-features/' + trackId,
                 headers: {
@@ -113,8 +103,9 @@ router.post('/audio-features', function(req, res, next) {
     }); // end post request for access token
 }); // end audiofeatures post route
 
+// deatiled analysis for later use
 router.post('/audioanalysis', function(req, res, next) {
-    // Use the access token to access the audio features endpoint
+    // use the access token to access the audio features endpoint
     var audioAnalysis = {
         url: 'https://api.spotify.com/v1/audio-analysis/' + req.body.id,
         headers: {
