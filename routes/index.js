@@ -18,10 +18,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/audio-features', function(req, res, next) {
-    console.log('> req.body:', req.body);
-    var trackTitle = req.body.trackName;
-    var trackTitleModified = trackTitle.replace(/ /g, '+');
-    console.log('> trackTitleModified: ', trackTitleModified);
+    var searchQuery = (req.body.searchQuery).replace(/ /g, '+');
 
     // get access token
     var getToken = {
@@ -35,33 +32,31 @@ router.post('/audio-features', function(req, res, next) {
         json: true
     };
     request.post(getToken, function(error, response, body) {
+        var access_token;
         if (!error && response.statusCode === 200) {
-            console.log('> POST request for access token response body: ', body);
-            var access_token = body.access_token;
-            console.log('> access_token: ', access_token);
+            access_token = body.access_token;
         } else {
-            console.log('> error in post request for access token: ', error);
+            console.log('Error getting access token: ', error);
+            console.log('Response status code: ', response.statusCode);
         }
 
         // get track info
         var audioTrack = {
-            url: 'https://api.spotify.com/v1/search?q=' + trackTitleModified + '&type=artist,track',
+            url: 'https://api.spotify.com/v1/search?q=' + searchQuery + '&type=artist,track',
             headers: {
                 'Authorization': 'Bearer ' + access_token
             },
             json: true
         };
-
         request.get(audioTrack, function(error, response, body) {
-            console.log('> statusCode: ', response.statusCode);
-            if (!error && response.statusCode == 200) {
-                console.log('> GET request for track info response body: ', body);
+            var trackId;
+            if (!error && response.statusCode == 200 && (body.tracks.items).length > 0) {
                 var trackInfo = body.tracks.items[0];
-                console.log('> trackInfo: ', trackInfo);
-                var trackId = trackInfo.id;
+                trackId = trackInfo.id;
             } else {
                 res.render('not-found');
-                console.log('> error requesting track info: ', error);
+                console.log('Error getting access token: ', error);
+                console.log('Response status code: ', response.statusCode);
             }
 
             // get audio features
@@ -92,12 +87,12 @@ router.post('/audio-features', function(req, res, next) {
                         tempo: body.tempo,
                         duration_ms: body.duration_ms,
                         time_signature: body.time_signature
-                    }
+                    };
                     res.render('audiofeatures', hbsObject);
                 } else {
-                    console.log('> error in get request for audio features: ', error);
+                    console.log('Error getting audio features: ', error);
+                    console.log('Response status code: ', response.statusCode);
                 }
-
             }); // end get request for track audio features
         }); // end get track info request
     }); // end post request for access token
