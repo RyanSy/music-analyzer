@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     res.render('index');
 });
 
-router.post('/audio-features', function(req, res, next) {
+router.post('/audiofeatures', function(req, res, next) {
     var searchQuery = (req.body.searchQuery).replace(/ /g, '+');
 
     // get access token
@@ -54,7 +54,7 @@ router.post('/audio-features', function(req, res, next) {
                 var trackInfo = body.tracks.items[0];
                 trackId = trackInfo.id;
             } else {
-                res.render('not-found');
+                res.render('notfound');
                 console.log('Error getting access token: ', error);
                 console.log('Response status code: ', response.statusCode);
             }

@@ -1,16 +1,11 @@
-<div class="columns">
-    <div class="column col-md-12">
-        <h1>Music Analyzer</h1>
-        <p>Get a detailed audio analysis for a single track. Utilizes the Spotify Web API. </p>
-
-        <form action="/audio-features" method="post">
-            <div class="form-group">
-                <input id="searchQuery" class="form-input col-lg-12" type="text" name="searchQuery" placeholder="Enter Song Title">
-                <input type="hidden" name="grant_type" value="client_credentials">
-            </div>
-            <div class="form-group">
-              <input id="submitButton" class="btn btn-primary" type="submit" value="Analyze">
-            </div>
-        </form>
+<div class="container">
+  <h1>Music Analyzer</h1>
+  <p>Get a detailed audio analysis for a single track. Utilizes the Spotify Web API. </p>
+  <form action="/audiofeatures" method="post">
+    <div class="form-group">
+      <input class="form-control" type="text" name="searchQuery" placeholder="Enter Song Title" required>
+      <input type="hidden" name="grant_type" value="client_credentials">
     </div>
+    <button class="btn btn-primary" type="submit">Analyze</button>
+  </form>
 </div>
