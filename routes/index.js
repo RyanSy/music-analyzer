@@ -19,7 +19,6 @@ router.get('/', function(req, res, next) {
 
 router.post('/audiofeatures', function(req, res, next) {
     var searchQuery = (req.body.searchQuery).replace(/ /g, '+');
-
     // get access token
     var getToken = {
         url: 'https://accounts.spotify.com/api/token',
@@ -68,30 +67,97 @@ router.post('/audiofeatures', function(req, res, next) {
                 json: true
             };
             request.get(audioFeatures, function(error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    var hbsObject = {
-                        access_token: access_token,
-                        artist: trackInfo.artists[0].name,
-                        title: trackInfo.name,
-                        id: trackInfo.id,
-                        danceability: body.danceability,
-                        energy: body.energy,
-                        key: body.key,
-                        loudness: body.loudness,
-                        mode: body.mode,
-                        speechiness: body.speechiness,
-                        acousticness: body.acousticness,
-                        instrumentalness: body.instrumentalness,
-                        liveness: body.liveness,
-                        valence: body.valence,
-                        tempo: body.tempo,
-                        duration_ms: body.duration_ms,
-                        time_signature: body.time_signature
-                    };
-                    res.render('audiofeatures', hbsObject);
-                } else {
-                    console.log('Error getting audio features: ', error);
-                    console.log('Response status code: ', response.statusCode);
+              var hbsObject = {};
+
+              // determine key
+              var keyValue = body.key;
+              var key;
+              switch(keyValue) {
+                case 0:
+                  key = 'C';
+                  break;
+                case 1:
+                  key = 'C♯, D♭';
+                  break;
+                case 2:
+                  key = 'D';
+                  break;
+                case 3:
+                key = 'D♯, E♭';
+                break;
+                case 4:
+                key = 'E';
+                break;
+                case 5:
+                key = 'F';
+                break;
+                case 6:
+                key = 'F♯, G♭ ';
+                break;
+                case 7:
+                key = 'G';
+                break;
+                case 8:
+                key = 'G♯, A♭';
+                break;
+                case 9:
+                key = 'A';
+                break;
+                case 10:
+                key = 'A♯, B♭';
+                break;
+                case 11:
+                key = 'B';
+              }
+
+              // determine Mode
+              var modeValue = body.mode;
+              var mode;
+              switch(modeValue) {
+                case 0:
+                mode = 'Minor';
+                break;
+                case 1:
+                mode = 'Major';
+                break;
+              }
+
+              var tempo = Math.round(body.tempo);
+
+              function getDuraton(ms) {
+                var minutes = Math.floor(ms / 60000);
+                var seconds = ((ms % 60000) / 1000).toFixed(0);
+                return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+              }
+
+              var duration = (getDuraton(body.duration_ms)).toString();
+              console.log('duration:', duration);
+
+              if (!error && response.statusCode == 200) {
+                trackFeatures = {
+                  access_token: access_token,
+                  image: trackInfo.album.images[0].url,
+                  artist: trackInfo.artists[0].name,
+                  title: trackInfo.name,
+                  id: trackInfo.id,
+                  danceability: body.danceability,
+                  energy: body.energy,
+                  key: key,
+                  loudness: body.loudness,
+                  mode: mode,
+                  speechiness: body.speechiness,
+                  acousticness: body.acousticness,
+                  instrumentalness: body.instrumentalness,
+                  liveness: body.liveness,
+                  valence: body.valence,
+                  tempo: tempo,
+                  duration: duration,
+                  time_signature: body.time_signature
+                };
+                  res.render('audiofeatures', trackFeatures);
+              } else {
+                  console.log('Error getting audio features: ', error);
+                  console.log('Response status code: ', response.statusCode);
                 }
             }); // end get request for track audio features
         }); // end get track info request

@@ -1,3 +1,16 @@
-body {
-  padding: 50px;
+#main-container {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+#logo {
+  height: 50px;
+  width: 50px;
+}
+#track-image {
+  height: 300px;
+  width: 300px;
+}
+#chart_div {
+  height: 400px;
+  width: 600px;
 }

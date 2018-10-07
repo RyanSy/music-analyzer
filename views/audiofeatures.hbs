@@ -1,55 +1,96 @@
 <div class="container">
-  <div>
-    <h2>Music Analyzer</h2>
-    <hr>
-    <h5>Artist: {{artist}}</h5>
-    <h5>Title: {{title}}</h5>
-    <br>
-    <h5>Danceability: {{danceability}}</h5>
-    <p>Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>
-    <br>
-    <h5>Energy: {{energy}}</h5>
-    <p>Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual
-        features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</p>
-    <br>
-    <h5>Key: {{key}}</h5>
-    <p>The key the track is in. Integers map to pitches using standard Pitch Class notation. E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on.</p>
-    <br>
-    <h5>Loudness: {{loudness}}</h5>
-    <p>The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical
-        strength (amplitude). Values typical range between -60 and 0 db.</p>
-    <br>
-    <h5>Mode: {{mode}}</h5>
-    <p>Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived. Major is represented by 1 and minor is 0.</p>
-    <br>
-    <h5>Speechiness: {{speechiness}}</h5>
-    <p>Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely
-        of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.</p>
-    <br>
-    <h5>Acousticness: {{acousticness}}</h5>
-    <p>A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</p>
-    <br>
-    <h5>Instrumentalness: {{instrumentalness}}</h5>
-    <p>Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains
-        no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.</p>
-    <br>
-    <h5>Liveness: {{liveness}}</h5>
-    <p>Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.</p>
-    <br>
-    <h5>Valence: {{valence}}</h5>
-    <p>A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</p>
-    <br>
-    <h5>Tempo: {{tempo}}</h5>
-    <p>The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.</p>
-    <br>
-    <h5>Duration: {{duration_ms}}</h5>
-    <p> The duration of the track in milliseconds.</p>
-    <br>
-    <h5>Time Signature: {{time_signature}}</h5>
-    <p>An estimated overall time signature of a track. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).</p>
-    <br>
-    <a href="/">Search Again</a>
+  <div class="text-center">
+    <img id="track-image" src="{{image}}" alt="{{artist}} - {{title}}">
+    <p>
+      <h5>{{title}}</h5>
+      <h6>{{artist}}</h6>
+    </p>
   </div>
+  <div class="text-center" id="chart_div"></div>
+  <br>
+  <h5>Danceability: {{danceability}}</h5>
+  <p>Danceability describes how suitable a track is for dancing based on a combination of musical elements including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable and 1.0 is most danceable.</p>
+  <br>
+  <h5>Energy: {{energy}}</h5>
+  <p>Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity. Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy, while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include dynamic range, perceived loudness, timbre, onset rate, and general entropy.</p>
+  <br>
+  <h5>Speechiness: {{speechiness}}</h5>
+  <p>Speechiness detects the presence of spoken words in a track. The more exclusively speech-like the recording (e.g. talk show, audio book, poetry), the closer to 1.0 the attribute value. Values above 0.66 describe tracks that are probably made entirely of spoken words. Values between 0.33 and 0.66 describe tracks that may contain both music and speech, either in sections or layered, including such cases as rap music. Values below 0.33 most likely represent music and other non-speech-like tracks.</p>
+  <br>
+  <h5>Acousticness: {{acousticness}}</h5>
+  <p>A confidence measure from 0.0 to 1.0 of whether the track is acoustic. 1.0 represents high confidence the track is acoustic.</p>
+  <br>
+  <h5>Instrumentalness: {{instrumentalness}}</h5>
+  <p>Predicts whether a track contains no vocals. "Ooh" and "aah" sounds are treated as instrumental in this context. Rap or spoken word tracks are clearly "vocal". The closer the instrumentalness value is to 1.0, the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent instrumental tracks, but confidence is higher as the value approaches 1.0.</p>
+  <br>
+  <h5>Liveness: {{liveness}}</h5>
+  <p>Detects the presence of an audience in the recording. Higher liveness values represent an increased probability that the track was performed live. A value above 0.8 provides strong likelihood that the track is live.</p>
+  <br>
+  <h5>Valence: {{valence}}</h5>
+  <p>A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative (e.g. sad, depressed, angry).</p>
+  <br>
+  <h5>Loudness: {{loudness}} dB</h5>
+  <p>The overall loudness of a track in decibels (dB). Loudness values are averaged across the entire track and are useful for comparing relative loudness of tracks. Loudness is the quality of a sound that is the primary psychological correlate of physical strength (amplitude). Values typical range between -60 and 0 dB.</p>
+  <br>
+  <h5>Key: {{key}}</h5>
+  <p>The key the track is in.</p>
+  <br>
+  <h5>Mode: {{mode}}</h5>
+  <p>Mode indicates the modality (major or minor) of a track, the type of scale from which its melodic content is derived.</p>
+  <br>
+  <h5>Tempo: {{tempo}} BPM</h5>
+  <p>The overall estimated tempo of a track in beats per minute (BPM). In musical terminology, tempo is the speed or pace of a given piece and derives directly from the average beat duration.</p>
+  <br>
+  <h5>Duration: {{duration}}</h5>
+  <p> The duration of the track.</p>
+  <br>
+  <h5>Time Signature: {{time_signature}}</h5>
+  <p>An estimated overall time signature of a track. The time signature (meter) is a notational convention to specify how many beats are in each bar (or measure).</p>
+  <br>
+  <a href="/">Search Again</a>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+<script type="text/javascript" src="javascripts/script.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart', 'bar']});
+  google.charts.setOnLoadCallback(drawBarColors);
+  var values = [{{danceability}}, {{energy}}, {{speechiness}}, {{acousticness}}, {{instrumentalness}}, {{liveness}}, {{valence}}];
+  var ratings = [];
+  for (var i = 0; i < values.length; i++) {
+    if (values[i] < 0.2) {
+      ratings.push('Very Low');
+    } else if (values[i] > 0.2 && values[i] <= 0.4) {
+      ratings.push('Low');
+    } else if (values[i] > 0.4 && values[i] <= 0.6) {
+      ratings.push('Average');
+    } else if (values[i] > 0.6 && values[i] <= 0.8) {
+      ratings.push('High');
+    } else if (values[i] > 0.8 && values[i] <= 1.0) {
+      ratings.push('Very High');
+    }
+  }
+  function drawBarColors() {
+    var dataTable = new google.visualization.DataTable();
+        dataTable.addColumn('string', 'Audio Feature');
+        dataTable.addColumn('number', 'Value');
+        dataTable.addColumn({type: 'string', role: 'tooltip'});
+        dataTable.addRows([
+          ['Danceability', {{danceability}}, ('{{danceability}}' + ' - ' + ratings[0])],
+          ['Energy', {{energy}}, ('{{energy}}' + ' - ' + ratings[1])],
+          ['Speechiness', {{speechiness}}, ('{{speechiness}}' + ' - ' + ratings[2])],
+          ['Acousticness', {{acousticness}}, ('{{acousticness}}' + ' - ' + ratings[3])],
+          ['Instrumentalness', {{instrumentalness}}, ('{{instrumentalness}}' + ' - ' + ratings[4])],
+          ['Liveness', {{liveness}}, ('{{liveness}}' + ' - ' + ratings[5])],
+          ['Valence', {{valence}}, ('{{valence}}' + ' - ' + ratings[6])]
+        ]);
+    var options = {
+      hAxis: {
+        maxValue: 0.8
+      },
+      legend: 'none'
+    };
+    var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+    chart.draw(dataTable, options);
+  }
+</script>
