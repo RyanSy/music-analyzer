@@ -131,7 +131,6 @@ router.post('/audiofeatures', function(req, res, next) {
               }
 
               var duration = (getDuraton(body.duration_ms)).toString();
-              console.log('duration:', duration);
 
               if (!error && response.statusCode == 200) {
                 trackFeatures = {
